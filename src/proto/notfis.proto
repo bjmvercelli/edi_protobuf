@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service NotifyService {
+    rpc NotfisMessage (Request) returns (Response);
+}
+
+message Item {
+    string name = 1;
+    double unit_price = 2;
+    int64 quantity = 3;
+}
+
+message Order {
+    repeated Item itens = 1;
+    double total_price = 2;
+    google.protobuf.Timestamp date = 3;
+}
+
+message TransportOrder {
+    google.protobuf.Timestamp creation_date = 1;
+    google.protobuf.Timestamp expected_date = 2;
+    google.protobuf.Timestamp limit_date = 3;
+}
+
+message Customer {
+    string name = 1;
+    string cpf = 2;
+    string phonenumber = 3;
+    string email = 4;
+}
+
+message Address {
+    string street = 1;
+    string district = 2;
+    int32 number = 3;
+    string city = 4;
+    string cep = 5;
+    optional string complement = 6;
+}
+
+message Request {
+    Order order = 1;
+    TransportOrder transport_order = 2;
+    Customer customer = 3;
+    Address address = 4;
+}
+
+message Response {
+    string message = 1;
+}

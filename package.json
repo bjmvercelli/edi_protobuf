@@ -13,11 +13,12 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.8.15",
     "@grpc/proto-loader": "^0.7.7",
+    "@prisma/client": "4.15.0",
     "cors": "^2.8.5",
     "express": "^4.18.2"
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/app.ts",
-    "gen:types": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/proto ./src/proto/*.proto"
+    "gen:types": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/proto/types ./src/proto/*.proto"
   }
 }

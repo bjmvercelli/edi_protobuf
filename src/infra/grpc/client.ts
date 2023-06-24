@@ -1,10 +1,10 @@
-import { GrpcObject, loadPackageDefinition, credentials, Client } from '@grpc/grpc-js';
+import { loadPackageDefinition, credentials, Client } from '@grpc/grpc-js';
 import { PackageDefinition, loadSync } from '@grpc/proto-loader';
-import { ProtoGrpcType } from '../../proto/helloworld';
+import { ProtoGrpcType } from '../../proto/types/notfis';
 
-class GrpcClient {
+export class GrpcClient {
   private packageDefinition: PackageDefinition;
-  private proto_path = __dirname + '/../proto/helloworld.proto';
+  private proto_path = __dirname + '/../proto/notfis.proto';
   private proto: ProtoGrpcType;
   private readonly target: string;
   private stub: Client;
@@ -13,12 +13,10 @@ class GrpcClient {
     this.packageDefinition = loadSync(this.proto_path, { keepCase: true });
     this.proto = loadPackageDefinition(this.packageDefinition) as unknown as ProtoGrpcType;
     this.target = target;
-    this.stub = new this.proto.Greeter(this.target, credentials.createInsecure()) as unknown as Client;
+    this.stub = new this.proto.NotifyService(this.target, credentials.createInsecure()) as unknown as Client;
   }
   
   call() {
     return 'oi';
   }
 }
-
-export { GrpcClient }
