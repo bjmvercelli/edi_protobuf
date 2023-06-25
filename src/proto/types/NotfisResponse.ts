@@ -1,10 +1,10 @@
 // Original file: src/proto/notfis.proto
 
 
-export interface Response {
+export interface NotfisResponse {
   'message'?: (string);
 }
 
-export interface Response__Output {
+export interface NotfisResponse__Output {
   'message': (string);
 }

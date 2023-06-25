@@ -3,7 +3,8 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 service NotifyService {
-    rpc NotfisMessage (Request) returns (Response);
+    rpc NotfisMessage (NotfisRequest) returns (NotfisResponse);
+    rpc ShipmentInfos (stream ShipmentRequest) returns (stream ShipmentResponse);
 }
 
 message Item {
@@ -40,13 +41,22 @@ message Address {
     optional string complement = 6;
 }
 
-message Request {
+message NotfisRequest {
     Order order = 1;
     TransportOrder transport_order = 2;
     Customer customer = 3;
     Address address = 4;
 }
 
-message Response {
+message NotfisResponse {
     string message = 1;
+}
+
+message ShipmentRequest {
+    Address address = 1;
+}
+
+message ShipmentResponse {
+    float price = 1;
+    int32 days = 2; 
 }

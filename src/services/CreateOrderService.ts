@@ -1,7 +1,7 @@
 import { GrpcClient } from "../infra/grpc/client";
 
 interface ICreateOrderService {
-  execute: () => Promise<any>;
+  execute: () => any;
 }
 
 export class CreateOrderService implements ICreateOrderService {
@@ -11,8 +11,10 @@ export class CreateOrderService implements ICreateOrderService {
     this.client = new GrpcClient('localhost:50051');
   }
 
-  async execute() {
+  execute() {
+    this.client.createOrder({
+      
+    })
     
-    return { message: "Hello World" };
   }
 }

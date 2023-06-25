@@ -8,7 +8,7 @@ datasource db {
 }
 
 model cliente {
-  id       Int        @id
+  id       Int        @id @default(autoincrement())
   nome     String     @db.VarChar(50)
   cpf      String     @unique @db.VarChar(20)
   telefone String     @db.VarChar(30)
@@ -20,7 +20,7 @@ model cliente {
 }
 
 model endereco {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   rua         String  @db.VarChar(60)
   cidade      String  @db.VarChar(40)
   cep         String  @db.VarChar(20)
@@ -32,14 +32,14 @@ model endereco {
 }
 
 model estoque {
-  id         Int     @id
+  id         Int     @id @default(autoincrement())
   quantidade Int
   produto_id Int
   produto    produto @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model item_pedido {
-  id             Int     @id
+  id             Int     @id @default(autoincrement())
   quantidade     Int
   preco_unitario Decimal @db.Decimal
   pedido_id      Int
@@ -49,7 +49,7 @@ model item_pedido {
 }
 
 model ordem_transporte {
-  id            Int        @id
+  id            Int        @id @default(autoincrement())
   data_criacao  DateTime   @db.Date
   data_prevista DateTime   @db.Date
   data_limite   DateTime   @db.Date
@@ -59,7 +59,7 @@ model ordem_transporte {
 }
 
 model pedido {
-  id               Int                @id
+  id               Int                @id @default(autoincrement())
   data_pedido      DateTime           @db.Date
   valor_total      Decimal            @db.Decimal
   cliente_id       Int
@@ -69,7 +69,7 @@ model pedido {
 }
 
 model produto {
-  id                Int            @id
+  id                Int            @id @default(autoincrement())
   nome              String         @db.VarChar(50)
   preco_unitario    Decimal        @db.Decimal
   transportadora_id Int
@@ -79,7 +79,7 @@ model produto {
 }
 
 model rastreio {
-  id                  Int              @id
+  id                  Int              @id @default(autoincrement())
   status              status_type?
   cidade              String           @db.VarChar(60)
   estado              String           @db.VarChar(30)
@@ -89,7 +89,7 @@ model rastreio {
 }
 
 model transportadora {
-  id      Int       @id
+  id      Int       @id @default(autoincrement())
   nome    String    @db.VarChar(50)
   cnpj    String    @unique @db.VarChar(30)
   produto produto[]

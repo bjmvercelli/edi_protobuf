@@ -11,10 +11,12 @@ export interface ProtoGrpcType {
   Address: MessageTypeDefinition
   Customer: MessageTypeDefinition
   Item: MessageTypeDefinition
+  NotfisRequest: MessageTypeDefinition
+  NotfisResponse: MessageTypeDefinition
   NotifyService: SubtypeConstructor<typeof grpc.Client, _NotifyServiceClient> & { service: _NotifyServiceDefinition }
   Order: MessageTypeDefinition
-  Request: MessageTypeDefinition
-  Response: MessageTypeDefinition
+  ShipmentRequest: MessageTypeDefinition
+  ShipmentResponse: MessageTypeDefinition
   TransportOrder: MessageTypeDefinition
   google: {
     protobuf: {
