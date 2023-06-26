@@ -5,15 +5,20 @@ import { ShippingRequest } from "../proto/types/ShippingRequest";
 export class GetTransportDetailsController {
   async handle(request: Request, response: Response){
     try {
-      // const { address } = request.body;
-      const payload: ShippingRequest = {
+      const { cep, street, number, complement, city, district } = request.query as any;
+
+      if (!cep || !street || !number || !complement || !city || !district) {
+        throw new Error("Missing required fields");
+      }
+
+      const payload: ShippingRequest  = {
         shippingAddress: {
-          cep: "12345678",
-          street: "Rua Teste",
-          number: 123,
-          complement: "Casa",
-          city: "Cidade Teste",
-          district: "Bairro Teste",
+          cep,
+          street,
+          number,
+          complement,
+          city,
+          district,
         },
         items: [
           {
