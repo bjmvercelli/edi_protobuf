@@ -1,9 +1,10 @@
 import { GrpcClient } from "../infra/grpc/client";
-import { Address } from "../proto/types/Address";
-import { ShipmentResponse } from "../proto/types/ShipmentResponse";
+
+import { ShippingRequest } from "../proto/types/ShippingRequest";
+import { ShippingResponse } from "../proto/types/ShippingResponse";
 
 interface IGetTransportDetailsService {
-	execute: (address: Address) => ShipmentResponse;
+	execute: (payload: ShippingRequest) => Promise<ShippingResponse>;
 }
 
 export class GetTransportDetailsService implements IGetTransportDetailsService {
@@ -13,9 +14,7 @@ export class GetTransportDetailsService implements IGetTransportDetailsService {
 		this.client = new GrpcClient('localhost:50051');
 	}
 
-	execute(address: Address): ShipmentResponse {
-		const response = this.client.shipmentInfo(address);
-
-		return response;
+	async execute(payload: ShippingRequest): Promise<ShippingResponse> {
+		return await this.client.shipmentInfo(payload);
 	}
 }

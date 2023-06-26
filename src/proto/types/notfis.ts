@@ -1,7 +1,7 @@
 import type * as grpc from '@grpc/grpc-js';
-import type { MessageTypeDefinition } from '@grpc/proto-loader';
+import type { EnumTypeDefinition, MessageTypeDefinition } from '@grpc/proto-loader';
 
-import type { NotifyServiceClient as _NotifyServiceClient, NotifyServiceDefinition as _NotifyServiceDefinition } from './NotifyService';
+import type { EDIServiceClient as _EDIServiceClient, EDIServiceDefinition as _EDIServiceDefinition } from './EDIService';
 
 type SubtypeConstructor<Constructor extends new (...args: any) => any, Subtype> = {
   new(...args: ConstructorParameters<Constructor>): Subtype;
@@ -9,15 +9,17 @@ type SubtypeConstructor<Constructor extends new (...args: any) => any, Subtype> 
 
 export interface ProtoGrpcType {
   Address: MessageTypeDefinition
+  CancelOrderRequest: MessageTypeDefinition
+  CancelOrderResponse: MessageTypeDefinition
+  CreateOrderResponse: MessageTypeDefinition
   Customer: MessageTypeDefinition
+  EDIService: SubtypeConstructor<typeof grpc.Client, _EDIServiceClient> & { service: _EDIServiceDefinition }
   Item: MessageTypeDefinition
-  NotfisRequest: MessageTypeDefinition
-  NotfisResponse: MessageTypeDefinition
-  NotifyService: SubtypeConstructor<typeof grpc.Client, _NotifyServiceClient> & { service: _NotifyServiceDefinition }
   Order: MessageTypeDefinition
-  ShipmentRequest: MessageTypeDefinition
-  ShipmentResponse: MessageTypeDefinition
-  TransportOrder: MessageTypeDefinition
+  OrderRequest: MessageTypeDefinition
+  SERVICES: EnumTypeDefinition
+  ShippingRequest: MessageTypeDefinition
+  ShippingResponse: MessageTypeDefinition
   google: {
     protobuf: {
       Timestamp: MessageTypeDefinition

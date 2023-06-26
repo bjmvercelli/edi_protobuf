@@ -8,7 +8,6 @@ export interface Address {
   'city'?: (string);
   'cep'?: (string);
   'complement'?: (string);
-  '_complement'?: "complement";
 }
 
 export interface Address__Output {
@@ -17,6 +16,5 @@ export interface Address__Output {
   'number': (number);
   'city': (string);
   'cep': (string);
-  'complement'?: (string);
-  '_complement': "complement";
+  'complement': (string);
 }
