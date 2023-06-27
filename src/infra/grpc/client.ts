@@ -3,9 +3,11 @@ import { PackageDefinition, loadSync } from '@grpc/proto-loader';
 
 import { ProtoGrpcType } from '../../proto/types/notfis';
 import { ShippingResponse } from '../../proto/types/ShippingResponse';
-import { Order } from '../../proto/types/Order';
 import { CreateOrderResponse } from '../../proto/types/CreateOrderResponse';
 import { ShippingRequest } from '../../proto/types/ShippingRequest';
+import { CreateOrderRequest } from '../../proto/types/CreateOrderRequest';
+import { CancelOrderResponse } from '../../proto/types/CancelOrderResponse';
+import { CancelOrderRequest } from '../../proto/types/CancelOrderRequest';
 
 export class GrpcClient {
   private readonly packageDefinition: PackageDefinition;
@@ -22,10 +24,12 @@ export class GrpcClient {
   }
   
   shipmentInfo(payload: ShippingRequest): Promise<ShippingResponse> {
+    console.log('Requisitando frete...');
     return new Promise((resolve) => {
       const call = this.stub.CalculateShipping(payload);
 
       call.on('data', (response: ShippingResponse) => {
+        console.log('Frete requisitado com sucesso!');
         resolve(response);
       });
 
@@ -35,18 +39,31 @@ export class GrpcClient {
     });
   }
 
-  createOrder(order: Order): CreateOrderResponse {
-    let data: CreateOrderResponse | undefined = {};
-
-    this.stub.CreateOrder(order, (err, response?: CreateOrderResponse) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-
-      data = response;
+  createOrder(order: CreateOrderRequest): Promise<CreateOrderResponse> {
+    console.log('Criando pedido...');
+    return new Promise(resolve => {
+      this.stub.CreateOrder(order, (err, response?: CreateOrderResponse) => {
+        if (err) {
+          console.error(err);
+          throw new Error(err.message);
+        }
+        console.log('Pedido criado com sucesso!');
+        resolve(response as CreateOrderResponse);
+      });
     });
+  }
 
-    return data;
+  cancelOrder(payload: CancelOrderRequest): Promise<CancelOrderResponse> {
+    console.log('Cancelando pedido...');
+    return new Promise(resolve => {
+      this.stub.CancelOrder({ trackingCode: payload.trackingCode }, (err, response?: CancelOrderResponse) => {
+        if (err) {
+          console.error(err);
+          throw new Error(err.message);
+        }
+        console.log('Pedido cancelado com sucesso!');
+        resolve(response as CancelOrderResponse);
+      });
+    });
   }
 }

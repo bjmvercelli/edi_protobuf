@@ -2,6 +2,7 @@ import { GrpcClient } from "../infra/grpc/client";
 
 import { ShippingRequest } from "../proto/types/ShippingRequest";
 import { ShippingResponse } from "../proto/types/ShippingResponse";
+import { OrderRepository } from "../repositories/OrderRepository";
 
 interface IGetTransportDetailsService {
 	execute: (payload: ShippingRequest) => Promise<ShippingResponse>;

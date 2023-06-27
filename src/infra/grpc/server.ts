@@ -1,8 +1,12 @@
-import { loadPackageDefinition, Server, ServerCredentials, ServerWritableStream } from '@grpc/grpc-js';
+import { loadPackageDefinition, sendUnaryData, Server, ServerCredentials, ServerUnaryCall, ServerWritableStream } from '@grpc/grpc-js';
 import { loadSync, PackageDefinition } from '@grpc/proto-loader';
 import { ProtoGrpcType } from '../../proto/types/notfis';
 import { ShippingRequest } from '../../proto/types/ShippingRequest';
 import { ShippingResponse } from '../../proto/types/ShippingResponse';
+import { Order } from '../../proto/types/Order';
+import { CreateOrderResponse } from '../../proto/types/CreateOrderResponse';
+import { CancelOrderRequest } from '../../proto/types/CancelOrderRequest';
+import { CancelOrderResponse } from '../../proto/types/CancelOrderResponse';
 
 export class GrpcServer {
   private server: Server;
@@ -21,7 +25,9 @@ export class GrpcServer {
   
   start() {
     this.server.addService(this.proto.EDIService.service, {
-      CalculateShipping: this.CalculateShipping
+      CalculateShipping: this.CalculateShipping,
+      CreateOrder: this.CreateOrder,
+      CancelOrder: this.CancelOrder
     });
     this.server.bindAsync('0.0.0.0:' + this.port, ServerCredentials.createInsecure(), (err, port) => {
       if (err) {
@@ -39,5 +45,25 @@ export class GrpcServer {
       shippingCost: 10.00,
       service: 'SEDEX'
     })
+  }
+
+  CreateOrder(
+    call: ServerUnaryCall<Order, CreateOrderResponse>, 
+    callback: sendUnaryData<CreateOrderResponse> 
+  ) {
+    callback(null, {
+      sucess: true,
+      trackingCode: '1234567890'
+    })
+  }
+
+  CancelOrder(
+    call: ServerUnaryCall<CancelOrderRequest, CancelOrderResponse>,
+    callback: sendUnaryData<CancelOrderResponse>
+  ) {
+    callback(null, {
+      success: true,
+      mensage: 'Order canceled'
+    });
   }
 }
