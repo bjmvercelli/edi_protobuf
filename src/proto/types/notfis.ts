@@ -11,12 +11,12 @@ export interface ProtoGrpcType {
   Address: MessageTypeDefinition
   CancelOrderRequest: MessageTypeDefinition
   CancelOrderResponse: MessageTypeDefinition
+  CreateOrderRequest: MessageTypeDefinition
   CreateOrderResponse: MessageTypeDefinition
   Customer: MessageTypeDefinition
   EDIService: SubtypeConstructor<typeof grpc.Client, _EDIServiceClient> & { service: _EDIServiceDefinition }
   Item: MessageTypeDefinition
   Order: MessageTypeDefinition
-  OrderRequest: MessageTypeDefinition
   SERVICES: EnumTypeDefinition
   ShippingRequest: MessageTypeDefinition
   ShippingResponse: MessageTypeDefinition

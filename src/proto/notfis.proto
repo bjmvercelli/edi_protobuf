@@ -4,7 +4,7 @@ import "google/protobuf/timestamp.proto";
 
 service EDIService {
     rpc CalculateShipping(ShippingRequest) returns (stream ShippingResponse) {}
-    rpc CreateOrder(Order) returns (CreateOrderResponse) {}
+    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
     rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse) {}
 }
 
@@ -15,9 +15,10 @@ enum SERVICES {
 }
 
 message Item {
-    string name = 1;
-    double unit_price = 2;
-    int64 quantity = 3;
+    int32 id = 1;
+    string name = 2;
+    double unit_price = 3;
+    int32 quantity = 4;
 }
 
 message Order {
@@ -28,16 +29,17 @@ message Order {
     Address shipping_address = 5;
 }
 
-message OrderRequest {
+message CreateOrderRequest {
     Order order = 1;
     SERVICES service = 2;
 }
 
 message Customer {
-    string name = 1;
-    string cpf = 2;
-    string phonenumber = 3;
-    string email = 4;
+    int32 int = 1;
+    string name = 2;
+    string cpf = 3;
+    string phonenumber = 4;
+    string email = 5;
 }
 
 message Address {
@@ -66,10 +68,10 @@ message CreateOrderResponse {
 }
 
 message CancelOrderRequest {
-    string order_id = 1;
+    string tracking_code = 1;
 }
 
 message CancelOrderResponse {
     bool success = 1;
     string mensage = 2;
-}
+} 

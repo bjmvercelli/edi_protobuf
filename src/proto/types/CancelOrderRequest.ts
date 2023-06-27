@@ -2,9 +2,9 @@
 
 
 export interface CancelOrderRequest {
-  'orderId'?: (string);
+  'trackingCode'?: (string);
 }
 
 export interface CancelOrderRequest__Output {
-  'orderId': (string);
+  'trackingCode': (string);
 }

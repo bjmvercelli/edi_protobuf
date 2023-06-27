@@ -4,8 +4,8 @@ import type * as grpc from '@grpc/grpc-js'
 import type { MethodDefinition } from '@grpc/proto-loader'
 import type { CancelOrderRequest as _CancelOrderRequest, CancelOrderRequest__Output as _CancelOrderRequest__Output } from './CancelOrderRequest';
 import type { CancelOrderResponse as _CancelOrderResponse, CancelOrderResponse__Output as _CancelOrderResponse__Output } from './CancelOrderResponse';
+import type { CreateOrderRequest as _CreateOrderRequest, CreateOrderRequest__Output as _CreateOrderRequest__Output } from './CreateOrderRequest';
 import type { CreateOrderResponse as _CreateOrderResponse, CreateOrderResponse__Output as _CreateOrderResponse__Output } from './CreateOrderResponse';
-import type { Order as _Order, Order__Output as _Order__Output } from './Order';
 import type { ShippingRequest as _ShippingRequest, ShippingRequest__Output as _ShippingRequest__Output } from './ShippingRequest';
 import type { ShippingResponse as _ShippingResponse, ShippingResponse__Output as _ShippingResponse__Output } from './ShippingResponse';
 
@@ -24,14 +24,14 @@ export interface EDIServiceClient extends grpc.Client {
   cancelOrder(argument: _CancelOrderRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_CancelOrderResponse__Output>): grpc.ClientUnaryCall;
   cancelOrder(argument: _CancelOrderRequest, callback: grpc.requestCallback<_CancelOrderResponse__Output>): grpc.ClientUnaryCall;
   
-  CreateOrder(argument: _Order, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
-  CreateOrder(argument: _Order, metadata: grpc.Metadata, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
-  CreateOrder(argument: _Order, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
-  CreateOrder(argument: _Order, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
-  createOrder(argument: _Order, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
-  createOrder(argument: _Order, metadata: grpc.Metadata, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
-  createOrder(argument: _Order, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
-  createOrder(argument: _Order, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  CreateOrder(argument: _CreateOrderRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  CreateOrder(argument: _CreateOrderRequest, metadata: grpc.Metadata, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  CreateOrder(argument: _CreateOrderRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  CreateOrder(argument: _CreateOrderRequest, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  createOrder(argument: _CreateOrderRequest, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  createOrder(argument: _CreateOrderRequest, metadata: grpc.Metadata, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  createOrder(argument: _CreateOrderRequest, options: grpc.CallOptions, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
+  createOrder(argument: _CreateOrderRequest, callback: grpc.requestCallback<_CreateOrderResponse__Output>): grpc.ClientUnaryCall;
   
 }
 
@@ -40,12 +40,12 @@ export interface EDIServiceHandlers extends grpc.UntypedServiceImplementation {
   
   CancelOrder: grpc.handleUnaryCall<_CancelOrderRequest__Output, _CancelOrderResponse>;
   
-  CreateOrder: grpc.handleUnaryCall<_Order__Output, _CreateOrderResponse>;
+  CreateOrder: grpc.handleUnaryCall<_CreateOrderRequest__Output, _CreateOrderResponse>;
   
 }
 
 export interface EDIServiceDefinition extends grpc.ServiceDefinition {
   CalculateShipping: MethodDefinition<_ShippingRequest, _ShippingResponse, _ShippingRequest__Output, _ShippingResponse__Output>
   CancelOrder: MethodDefinition<_CancelOrderRequest, _CancelOrderResponse, _CancelOrderRequest__Output, _CancelOrderResponse__Output>
-  CreateOrder: MethodDefinition<_Order, _CreateOrderResponse, _Order__Output, _CreateOrderResponse__Output>
+  CreateOrder: MethodDefinition<_CreateOrderRequest, _CreateOrderResponse, _CreateOrderRequest__Output, _CreateOrderResponse__Output>
 }

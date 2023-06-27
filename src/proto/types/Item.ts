@@ -1,15 +1,16 @@
 // Original file: src/proto/notfis.proto
 
-import type { Long } from '@grpc/proto-loader';
 
 export interface Item {
+  'id'?: (number);
   'name'?: (string);
   'unitPrice'?: (number | string);
-  'quantity'?: (number | string | Long);
+  'quantity'?: (number);
 }
 
 export interface Item__Output {
+  'id': (number);
   'name': (string);
   'unitPrice': (number);
-  'quantity': (string);
+  'quantity': (number);
 }
