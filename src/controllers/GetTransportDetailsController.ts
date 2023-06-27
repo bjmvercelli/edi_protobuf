@@ -7,7 +7,7 @@ export class GetTransportDetailsController {
     try {
       const { cep, street, number, complement, city, district } = request.query as any;
 
-      if (!cep || !street || !number || !complement || !city || !district) {
+      if (!cep || !street || !number || !city || !district) {
         throw new Error("Missing required fields");
       }
 

@@ -23,14 +23,20 @@ export class GrpcClient {
     this.stub = new this.proto.EDIService(this.target, credentials.createInsecure());
   }
   
-  shipmentInfo(payload: ShippingRequest): Promise<ShippingResponse> {
+  shipmentInfo(payload: ShippingRequest): Promise<ShippingResponse[]> {
     console.log('Requisitando frete...');
     return new Promise((resolve) => {
+      const responseData: ShippingResponse[] = [];
       const call = this.stub.CalculateShipping(payload);
 
       call.on('data', (response: ShippingResponse) => {
-        console.log('Frete requisitado com sucesso!');
-        resolve(response);
+        console.log('Recebido frete do serviço: ', response.service);
+        responseData.push(response);
+      });
+
+      call.on('end', () => {
+        console.log('Fim da requisição de frete.');
+        resolve(responseData);
       });
 
       call.on('error', (error: Error) => {

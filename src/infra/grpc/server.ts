@@ -44,7 +44,14 @@ export class GrpcServer {
       expectedDays: 5,
       shippingCost: 10.00,
       service: 'SEDEX'
-    })
+    });
+    call.write({
+      expectedDays: 10,
+      shippingCost: 5.00,
+      service: 'PAC'
+    });
+
+    call.end();
   }
 
   CreateOrder(
