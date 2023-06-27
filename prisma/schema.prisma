@@ -53,7 +53,7 @@ model ordem_transporte {
   data_criacao  DateTime   @db.Date
   data_prevista DateTime   @db.Date
   data_limite   DateTime   @db.Date
-  pedido_id     Int
+  pedido_id     Int        @unique
   pedido        pedido     @relation(fields: [pedido_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   rastreio      rastreio[]
 }
@@ -64,7 +64,7 @@ model pedido {
   valor_total      Decimal            @db.Decimal
   cliente_id       Int
   item_pedido      item_pedido[]
-  ordem_transporte ordem_transporte[]
+  ordem_transporte ordem_transporte?
   cliente          cliente            @relation(fields: [cliente_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -84,6 +84,7 @@ model rastreio {
   cidade              String           @db.VarChar(60)
   estado              String           @db.VarChar(30)
   atual               Boolean
+  codigo_rastreio     String           @db.VarChar(100)
   ordem_transporte_id Int
   ordem_transporte    ordem_transporte @relation(fields: [ordem_transporte_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
@@ -100,4 +101,5 @@ enum status_type {
   Enviado
   Em_Transporte     @map("Em Transporte")
   Entregue
+  Cancelado
 }
