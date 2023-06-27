@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "ts-node-dev --exit-child --respawn --transpile-only --ignore-watch node_modules src/app.ts",
     "gen:types": "rm -rf ./src/proto/types && proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/proto/types ./src/proto/*.proto",
-    "seed": "ts-node-dev --transpile-only ./prisma/seed.ts"
+    "seed": "ts-node-dev --transpile-only ./prisma/seed.ts",
+    "prisma:migrate": "prisma migrate dev"
   }
 }
