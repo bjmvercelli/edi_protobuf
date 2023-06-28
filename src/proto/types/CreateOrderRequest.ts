@@ -6,9 +6,11 @@ import type { SERVICES as _SERVICES, SERVICES__Output as _SERVICES__Output } fro
 export interface CreateOrderRequest {
   'order'?: (_Order | null);
   'service'?: (_SERVICES);
+  'deliveryTime'?: (number);
 }
 
 export interface CreateOrderRequest__Output {
   'order': (_Order__Output | null);
   'service': (_SERVICES__Output);
+  'deliveryTime': (number);
 }

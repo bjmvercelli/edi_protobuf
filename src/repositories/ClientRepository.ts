@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { prisma } from "../infra/db/prisma";
 
 
 interface IClientRepository {
@@ -9,7 +10,7 @@ export class ClientRepository implements IClientRepository {
   private client: PrismaClient;
 
   constructor() {
-    this.client = new PrismaClient();
+    this.client = prisma;
   }
 
   async getByEmail(email: string) {

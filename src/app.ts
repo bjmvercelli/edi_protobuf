@@ -16,6 +16,6 @@ app.listen(3000, () => {
   console.log("Server is running on port " + PORT);
 });
 
-const grpcServer = new GrpcServer(50051);
+// const grpcServer = new GrpcServer(50051);
 
-grpcServer.start();
+// grpcServer.start();

@@ -7,6 +7,8 @@ import { SERVICES } from "../proto/types/SERVICES";
 import { ClientRepository } from "../repositories/ClientRepository";
 import { OrderRepository } from "../repositories/OrderRepository";
 
+import { Timestamp } from "../proto/types/google/protobuf/Timestamp";
+
 interface ICreateOrderService {
   execute: (payload: TCreateOrderBody) => Promise<CreateOrderResponse & { id: number }>;
 }
@@ -16,7 +18,9 @@ type TCreateOrderBody = {
   items: Item[];
   totalPrice: number;
   address: Address;
+  deliveryTime: number;
 }
+
 export class CreateOrderService implements ICreateOrderService {
   private client: GrpcClient;
   private orderRepository: OrderRepository;
@@ -32,19 +36,23 @@ export class CreateOrderService implements ICreateOrderService {
     const customer = await this.clientRepository.getByEmail(payload.customer);
 
     const order: Order = {
-      customer,
-      date: {
-        seconds: new Date().getTime() / 1000,
-        nanos: new Date().getMilliseconds() * 1000000,
-      },
       items: payload.items,
-      shippingAddress: payload.address,
       totalPrice: payload.totalPrice,
+      date: new Date() as Timestamp,
+      customer: {
+        id: customer?.id,
+        name: customer?.nome,
+        email: customer?.email,
+        cpf: customer?.cpf,
+        phonenumber: customer?.telefone,
+      },
+      shippingAddress: payload.address,
     }
 
     const transporterResponse = await this.client.createOrder({
       order,
-      service: SERVICES.SEDEX
+      service: SERVICES.SEDEX,
+      deliveryTime: payload.deliveryTime,
     });
 
     const id = await this.orderRepository.create({

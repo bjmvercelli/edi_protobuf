@@ -47,11 +47,12 @@ export class GrpcClient {
 
   createOrder(order: CreateOrderRequest): Promise<CreateOrderResponse> {
     console.log('Criando pedido...');
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.stub.CreateOrder(order, (err, response?: CreateOrderResponse) => {
         if (err) {
           console.error(err);
-          throw new Error(err.message);
+          reject(err);
+          return;
         }
         console.log('Pedido criado com sucesso!');
         resolve(response as CreateOrderResponse);
@@ -67,7 +68,7 @@ export class GrpcClient {
           console.error(err);
           throw new Error(err.message);
         }
-        console.log('Pedido cancelado com sucesso!');
+        console.log('Pedido cancelado com sucesso!', response);
         resolve(response as CancelOrderResponse);
       });
     });

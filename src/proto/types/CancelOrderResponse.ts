@@ -3,10 +3,10 @@
 
 export interface CancelOrderResponse {
   'success'?: (boolean);
-  'mensage'?: (string);
+  'message'?: (string);
 }
 
 export interface CancelOrderResponse__Output {
   'success': (boolean);
-  'mensage': (string);
+  'message': (string);
 }

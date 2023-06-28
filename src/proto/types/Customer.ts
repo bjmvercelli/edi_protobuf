@@ -2,7 +2,7 @@
 
 
 export interface Customer {
-  'int'?: (number);
+  'id'?: (number);
   'name'?: (string);
   'cpf'?: (string);
   'phonenumber'?: (string);
@@ -10,7 +10,7 @@ export interface Customer {
 }
 
 export interface Customer__Output {
-  'int': (number);
+  'id': (number);
   'name': (string);
   'cpf': (string);
   'phonenumber': (string);

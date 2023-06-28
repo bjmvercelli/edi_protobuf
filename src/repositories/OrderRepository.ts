@@ -1,4 +1,5 @@
 import { PrismaClient, pedido as Pedido } from "@prisma/client";
+import { prisma } from "../infra/db/prisma";
 
 interface IOrderRepository {
   create: (order: TPedido) => Promise<number>;
@@ -14,7 +15,7 @@ export class OrderRepository implements IOrderRepository {
   private client: PrismaClient;
 
   constructor() {
-    this.client = new PrismaClient();
+    this.client = prisma;
   }
 
   async create(order: TPedido): Promise<number> {

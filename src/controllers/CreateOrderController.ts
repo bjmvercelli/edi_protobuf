@@ -9,6 +9,7 @@ type TCreateOrderBody = {
   items: Item[];
   totalPrice: number;
   address: Address;
+  deliveryTime: number;
 }
 export class CreateOrderController {
   async handle(request: Request, response: Response): Promise<Response<CreateOrderResponse>> {
@@ -17,10 +18,11 @@ export class CreateOrderController {
         customer,
         items,
         totalPrice,
-        address
+        address,
+        deliveryTime
       }: TCreateOrderBody = request.body;
 
-      if (!customer || !items || !totalPrice) {
+      if (!customer || !items || !totalPrice || !address || !deliveryTime) {
         throw new Error("Missing required fields");
       }
 
@@ -30,7 +32,8 @@ export class CreateOrderController {
         customer,
         items,
         totalPrice,
-        address
+        address,
+        deliveryTime
       });
 
       return response.status(200).json(data);
